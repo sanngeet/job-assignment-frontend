@@ -8,7 +8,7 @@
         <div class="steps d-flex">
           <div class="step mx-3" *ngFor="let s of steps">
             <button class="btn text-capitalize"
-              [ngClass]="s.step_id == step.step_id ? 'btn-primary' : 'btn-outline-primary'"
+              [ngClass]="(s.step_id && step && step.step_id && s.step_id == step.step_id)  ? 'btn-primary' : 'btn-outline-primary'"
               (click)="getStep(s)">{{s.step_name}}
             </button>
             <button (click)="deleteStep(s)"

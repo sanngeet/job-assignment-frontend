@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
 
   addStep() {
     this.showStepForm = true;
-    this.step = null;
+    // this.step = null;
     this.showAddItem = false;
   }
 
