@@ -1,0 +1,9 @@
+.content{
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+
+.card{
+    width: 800px;
+}
