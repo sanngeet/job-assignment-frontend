@@ -19,11 +19,10 @@ export class ApiService {
     const httpOptions = {
       withCredentials: true,
     };
-    const body = JSON.stringify(req);
 
     let api = this.apiUrl + '/steps';
 
-    let res = this.http.post(api, body, httpOptions);
+    let res = this.http.post(api, req, httpOptions);
     return res;
   }
 
@@ -37,9 +36,9 @@ export class ApiService {
       withCredentials: true,
     };
 
-    let api = this.apiUrl + 'steps';
+    let api = this.apiUrl + 'steps/' + req.id;
 
-    let res = this.http.put(api, { id: req.id, step: req.step }, httpOptions);
+    let res = this.http.put(api, { step: req.step }, httpOptions);
     return res;
   }
 
@@ -48,10 +47,8 @@ export class ApiService {
       withCredentials: true,
     };
 
-    const body = JSON.stringify(req);
-
     let api = this.apiUrl + '/steps/' + req.stepId;
-    let res = this.http.post(api, body, httpOptions);
+    let res = this.http.delete(api, httpOptions);
     return res;
   }
 
@@ -59,11 +56,10 @@ export class ApiService {
     const httpOptions = {
       withCredentials: true,
     };
-    const body = JSON.stringify(req);
 
     let api = this.apiUrl + '/items';
 
-    let res = this.http.post(api, body, httpOptions);
+    let res = this.http.post(api, req, httpOptions);
     return res;
   }
 
@@ -71,11 +67,10 @@ export class ApiService {
     const httpOptions = {
       withCredentials: true,
     };
-    const body = JSON.stringify(req);
 
-    let api = this.apiUrl + '/item';
+    let api = this.apiUrl + '/items/' + req.item_id;
 
-    let res = this.http.post(api, body, httpOptions);
+    let res = this.http.put(api, req, httpOptions);
     return res;
   }
 
@@ -84,10 +79,8 @@ export class ApiService {
       withCredentials: true,
     };
 
-    const body = JSON.stringify(req);
-
     let api = this.apiUrl + '/items/' + req.itemId;
-    let res = this.http.post(api, body, httpOptions);
+    let res = this.http.delete(api, httpOptions);
     return res;
   }
 }

@@ -36,7 +36,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.apiService.steps().subscribe((data: any) => {
-      this.steps = data.response.results;
+      this.steps = data.result;
       this.step = this.steps[0];
       this.items = this.steps[0].items;
     });
@@ -80,14 +80,14 @@ export class AppComponent implements OnInit {
       this.itemForm.description
     ) {
       let req = {
-        step_id: this.step.step_id,
+        id: this.step.step_id,
         item: this.itemForm.name,
         title: this.itemForm.title,
         description: this.itemForm.description,
       };
       this.apiService.createItem(req).subscribe((data: any) => {
         if (data.success) {
-          this.steps = data.response.results.steps;
+          this.steps = data.result;
           let currentIndex = this.steps.findIndex(
             (x: any) => x.step_id === this.step.step_id
           );
@@ -98,10 +98,10 @@ export class AppComponent implements OnInit {
           this.itemForm.title = '';
           this.itemForm.description = '';
           this.toastInfo.status = 'success';
-          this.toastInfo.message = data.response.results.msg;
+          this.toastInfo.message = data.message;
         } else {
           this.toastInfo.status = 'danger';
-          this.toastInfo.message = data.response.results.msg;
+          this.toastInfo.message = data.message;
         }
       });
     } else {
@@ -127,21 +127,22 @@ export class AppComponent implements OnInit {
       };
       this.apiService.updateItem(req).subscribe((data: any) => {
         if (data.success) {
-          this.steps = data.response.results.steps;
+          this.steps = data.result;
           let currentIndex = this.steps.findIndex(
             (x: any) => x.step_id === this.step.step_id
           );
           this.step = this.steps[currentIndex];
           this.items = this.step.items;
 
+          this.itemForm.id = '';
           this.itemForm.name = '';
           this.itemForm.title = '';
           this.itemForm.description = '';
           this.toastInfo.status = 'success';
-          this.toastInfo.message = data.response.results.msg;
+          this.toastInfo.message = data.message;
         } else {
           this.toastInfo.status = 'danger';
-          this.toastInfo.message = data.response.results.msg;
+          this.toastInfo.message = data.message;
         }
       });
     } else {
@@ -158,13 +159,13 @@ export class AppComponent implements OnInit {
       };
       this.apiService.createStep(req).subscribe((data: any) => {
         if (data.success) {
-          this.steps = data.response.results.steps;
+          this.steps = data.result;
           this.stepForm.name = '';
           this.toastInfo.status = 'success';
-          this.toastInfo.message = data.response.results.msg;
+          this.toastInfo.message = data.message;
         } else {
           this.toastInfo.status = 'danger';
-          this.toastInfo.message = data.response.results.msg;
+          this.toastInfo.message = data.message;
         }
       });
     } else {
@@ -180,12 +181,12 @@ export class AppComponent implements OnInit {
     };
     this.apiService.deleteStep(req).subscribe((data: any) => {
       if (data.success) {
-        this.steps = data.response.results.steps;
+        this.steps = data.result;
         this.toastInfo.status = 'success';
-        this.toastInfo.message = data.response.results.msg;
+        this.toastInfo.message = data.message;
       } else {
         this.toastInfo.status = 'danger';
-        this.toastInfo.message = data.response.results.msg;
+        this.toastInfo.message = data.message;
       }
       this.toastInfo.visibility = true;
     });
@@ -198,7 +199,7 @@ export class AppComponent implements OnInit {
     };
     this.apiService.deleteItem(req).subscribe((data: any) => {
       if (data.success) {
-        this.steps = data.response.results.steps;
+        this.steps = data.result;
         let currentIndex = this.steps.findIndex(
           (x: any) => x.step_id === this.step.step_id
         );
@@ -206,10 +207,10 @@ export class AppComponent implements OnInit {
         this.items = this.step.items;
 
         this.toastInfo.status = 'success';
-        this.toastInfo.message = data.response.results.msg;
+        this.toastInfo.message = data.message;
       } else {
         this.toastInfo.status = 'danger';
-        this.toastInfo.message = data.response.results.msg;
+        this.toastInfo.message = data.message;
       }
       this.toastInfo.visibility = true;
     });

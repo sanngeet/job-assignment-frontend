@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://api.ssd.loc',
+  apiUrl: 'http://localhost:5000',
 };
 
 /*
